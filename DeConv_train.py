@@ -1,9 +1,10 @@
+#Self coded from scratch, no reference code,Model is as per the DCNN proposed in the paper in part b
 import torch.nn as nn
 import torch
 torch.cuda.empty_cache()
 import numpy as np
 import cv2
-#Model is as per the DCNN proposed in the paper 
+
 
 class DeConv(nn.Module):
     def __init__(self):
