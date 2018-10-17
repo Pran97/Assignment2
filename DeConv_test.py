@@ -1,10 +1,10 @@
+#Self coded from scratch, no reference code.
 import torch.nn as nn
 import torch
-#torch.cuda.empty_cache()
+torch.cuda.empty_cache()
 import numpy as np
 import cv2
 #Model is nothing but modified version of standard VGG netowrk
-
 class DeConv(nn.Module):
     def __init__(self):
         super(DeConv, self).__init__()
