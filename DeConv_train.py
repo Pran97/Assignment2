@@ -5,13 +5,13 @@ torch.cuda.empty_cache()
 import numpy as np
 import cv2
 
-
+#Model based on the idea of seperable kernels, and padding given according to the formulae in line 14
 class DeConv(nn.Module):
     def __init__(self):
         super(DeConv, self).__init__()
         
         # Convolution 1
-        self.cnn1 = nn.Conv2d(in_channels=1, out_channels=64, kernel_size=(1,49), stride=1, padding=(0,24))#Win-k+2P+1=Wout
+        self.cnn1 = nn.Conv2d(in_channels=1, out_channels=64, kernel_size=(1,49), stride=1, padding=(0,24))#Win-k+2P+1=Wout cosidering stride=1
         #self.drop=nn.Dropout2d(0.4)
         torch.nn.init.xavier_uniform(self.cnn1.weight)
         self.T = nn.Tanh()
@@ -41,6 +41,7 @@ class DeConv(nn.Module):
         out = self.cnn3(out)
         
         return out
+#Not trained convergig too slow feel free to try out this is the Outlier Deconvolution Model as mentioned in the paper.
 class ODeConv(nn.Module):
     def __init__(self):
         super(ODeConv, self).__init__()
@@ -131,7 +132,7 @@ l=[]
 itr=[]
 #model1=torch.load('noise3.pkl')
 from skimage.measure import compare_ssim as ssim
-
+#Standard procedure for training
 for epoch in range(epochs):
     for i, (im1,l1) in enumerate(loader_train):
         x=im1.data.numpy()
