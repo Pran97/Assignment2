@@ -1,3 +1,7 @@
+#Model based on https://github.com/SaoYan/DnCNN-PyTorch , i.e class DeoisingCNN is similar but not same ( I know tensorflow, took assignment as 
+#opportunity to learn pytorch)
+#Rest is self coded.
+
 import torch.nn as nn
 import torch
 torch.cuda.empty_cache()
