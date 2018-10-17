@@ -61,7 +61,7 @@ iter=0
 l=[]
 itr=[]
 import matplotlib.pyplot as plt
-
+#Standard procedure for training.
 for epoch in range(epochs):
     for i, (im1,l1) in enumerate(loader_train):
         images = Variable(im1[:,:1,:,:].cuda())
@@ -95,7 +95,7 @@ for epoch in range(epochs):
         if (epoch%5==0):
             t=0
             for a,b in train_test_image_folder:
-                x=np.asarray(a)#There is some proble in PIL to tensor conversion
+                x=np.asarray(a)#There is some problem in PIL to tensor conversion so first convert to np array
                 x=x[:,:,:1].reshape(1,1,180,180)#Greyscale conversion and need approriate dim of (x,1,180,180)
                 #for model to work
                 
