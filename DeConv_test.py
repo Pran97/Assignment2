@@ -5,6 +5,7 @@ torch.cuda.empty_cache()
 import numpy as np
 import cv2
 #Model is nothing but modified version of standard VGG netowrk
+#Denonvolution Class has to be respecified in order to load the model
 class DeConv(nn.Module):
     def __init__(self):
         super(DeConv, self).__init__()
@@ -81,6 +82,7 @@ def psnr(i1, i2):
     return 20 * torch.log10(PIXEL_MAX / torch.sqrt(mse))
 
 import torch
+#loading the trained model
 model=torch.load('best7.pkl').cuda()#best7 and best6_noisy
 import cv2
 import numpy as np
@@ -95,9 +97,9 @@ from torch.autograd import Variable
 loader_test = DataLoader(dataset=train_test_image_folder,batch_size=12, shuffle=False)
 for a,b in train_test_image_folder:
     x=np.asarray(a).astype(float)#There is some proble in PIL to tensor conversion
-    x=x/255
+    x=x/255#normalizing the image as per how the training had occured
     
-    x=x[:,:,:1].reshape(1,1,180,180)#Greyscale conversion and need approriate dim of (x,1,180,180)
+    x=x[:,:,:1].reshape(1,1,180,180)#Greyscale conversion and need approriate dim of (x,1,180,180) for saved model to understand
     blur=cv2.blur(x[0,:,:,:],(10,10))
     
     blur=blur.reshape(1,1,180,180)
